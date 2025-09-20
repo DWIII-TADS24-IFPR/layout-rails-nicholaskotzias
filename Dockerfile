@@ -1,4 +1,4 @@
-FROM ruby:3.2
+FROM ruby:3.4
 
 # Instalar dependências
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
