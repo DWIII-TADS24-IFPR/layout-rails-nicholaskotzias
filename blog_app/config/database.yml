@@ -1,0 +1,12 @@
+default: &default
+ adapter: postgresql
+ encoding: unicode
+ username: postgres
+ password: password
+ host: db
+development:
+ <<: *default
+ database: blog_app_development
+test:
+ <<: *default
+ database: blog_app_test
