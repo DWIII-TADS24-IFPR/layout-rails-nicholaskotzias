@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind.css", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+    <div class="bg-red-500 text-white p-4">
+      Tailwind is working!
+    </div>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
