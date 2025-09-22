@@ -1,32 +1,42 @@
-<%= form_with(model: post, class: "contents") do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%= form_with(model: post, class: "w-full space-y-6") do |form| %>
 
-      <ul class="list-disc ml-6">
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+  <% if post.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-700 px-4 py-3 rounded-md border border-red-200">
+      <h2 class="font-semibold mb-2"><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": post.errors[:title].none?, "border-red-400 focus:outline-red-600": post.errors[:title].any?}] %>
+  <div>
+    <%= form.label :title, class: "block font-medium text-gray-700" %>
+    <%= form.text_field :title, class: [
+          "mt-2 block w-full rounded-md shadow-sm px-3 py-2 border focus:ring-2 focus:ring-blue-500 focus:outline-none",
+          post.errors[:title].any? ? "border-red-400" : "border-gray-300"
+        ] %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :body %>
-    <%= form.text_area :body, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": post.errors[:body].none?, "border-red-400 focus:outline-red-600": post.errors[:body].any?}] %>
+  <div>
+    <%= form.label :body, class: "block font-medium text-gray-700" %>
+    <%= form.text_area :body, rows: 6, class: [
+          "mt-2 block w-full rounded-md shadow-sm px-3 py-2 border focus:ring-2 focus:ring-blue-500 focus:outline-none",
+          post.errors[:body].any? ? "border-red-400" : "border-gray-300"
+        ] %>
   </div>
 
-  <div class="my-5 flex items-center gap-2">
-    <%= form.label :published %>
-    <%= form.check_box :published, class: ["block shadow-sm rounded-md border order-first h-5 w-5", {"border-gray-400 focus:outline-blue-600": post.errors[:published].none?, "border-red-400 focus:outline-red-600": post.errors[:published].any?}] %>
+  <div class="flex items-center space-x-3">
+    <%= form.check_box :published, class: [
+          "h-5 w-5 rounded border focus:ring-2 focus:ring-blue-500",
+          post.errors[:published].any? ? "border-red-400" : "border-gray-300"
+        ] %>
+    <%= form.label :published, class: "text-gray-700 font-medium" %>
   </div>
 
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div>
+    <%= form.submit class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-medium px-4 py-2 rounded-md shadow-sm transition-colors duration-200 cursor-pointer" %>
   </div>
+
 <% end %>
