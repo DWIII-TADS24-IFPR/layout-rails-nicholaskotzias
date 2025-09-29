@@ -1,11 +1,15 @@
 class User < ApplicationRecord
+  has_many :posts
+  
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable, :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   after_create :send_welcome_email
 
-  private 
+  private
+  
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_now
   end
